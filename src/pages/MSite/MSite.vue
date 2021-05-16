@@ -1,16 +1,23 @@
 <template>
   <section class="msite">
     <HeaderTop :title="address.name">
-      <span class="header_search" slot="left">
+      <router-link class="header_search" slot="left" to="/Search">
         <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+      </router-link>
+      <router-link
+        class="header_login"
+        slot="right"
+        :to="userInfo._id ? '/userInfo' : '/login'"
+      >
+        <span class="header_login_text" v-if="!userInfo._id">登录|注册</span>
+        <span class="header_login_text" v-else
+          ><i class="iconfont icon-person"></i
+        ></span>
+      </router-link>
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
-      <div class="swiper-container">
+      <div class="swiper-container" v-if="categorys.length">
         <div class="swiper-wrapper">
           <div
             class="swiper-slide"
@@ -33,6 +40,7 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
       </div>
+      <img src="./images/msite_back.svg" alt="back" v-else />
     </nav>
     <!--首页附近商家-->
     <div class="msite_shop_list">
@@ -61,7 +69,7 @@ export default {
     this.$store.dispatch("getShops");
   },
   computed: {
-    ...mapState(["address", "categorys"]),
+    ...mapState(["address", "categorys", "userInfo"]),
     categorysArr() {
       const { categorys } = this;
       //准备空的两数组

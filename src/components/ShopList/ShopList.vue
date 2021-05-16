@@ -1,6 +1,6 @@
 <template>
   <div class="shop_container">
-    <ul class="shop_list">
+    <ul class="shop_list" v-if="shops.length">
       <li
         class="shop_li border-1px"
         v-for="(shop, index) in shops"
@@ -25,13 +25,7 @@
             </section>
             <section class="shop_rating_order">
               <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item half"></span>
-                  <span class="star-item off"></span>
-                </div>
+                <Star :score="shop.rating" :size="24" />
                 <div class="rating_section">
                   {{ shop.rating }}
                 </div>
@@ -56,20 +50,29 @@
         </a>
       </li>
     </ul>
+    <ul v-else>
+      <li v-for="iem in 6">
+        <img src="./images/shop_back.svg" alt="back" />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import Star from "../Star/Star.vue";
 import { mapState } from "vuex";
 export default {
   data() {
     return {
       baseImgUrl:
-        "https://raw.githubusercontent.com/W-Qing/Vue-MintShop/master/mintshop-client/src/components/ShopList/images/"
+        "https://cdn.jsdelivr.net/gh/nekochram/Vue_gshop/src/components/ShopList/images/shopImages/"
     };
   },
   computed: {
     ...mapState(["shops"])
+  },
+  components: {
+    Star
   }
 };
 </script>
@@ -139,54 +142,7 @@ export default {
               .shop_rating_order_left
                 float left
                 color #ff9a0d
-                .star //2x图 3x图
-                  float left
-                  font-size 0
-                  .star-item
-                    display inline-block
-                    background-repeat no-repeat
-                  &.star-48
-                    .star-item
-                      width 20px
-                      height 20px
-                      margin-right 22px
-                      background-size 20px 20px
-                      &:last-child
-                        margin-right: 0
-                      &.on
-                        bg-image('./images/stars/star48_on')
-                      &.half
-                        bg-image('./images/stars/star48_half')
-                      &.off
-                        bg-image('./images/stars/star48_off')
-                  &.star-36
-                    .star-item
-                      width 15px
-                      height 15px
-                      margin-right 6px
-                      background-size 15px 15px
-                      &:last-child
-                        margin-right 0
-                      &.on
-                        bg-image('./images/stars/star36_on')
-                      &.half
-                        bg-image('./images/stars/star36_half')
-                      &.off
-                        bg-image('./images/stars/star36_off')
-                  &.star-24
-                    .star-item
-                      width 10px
-                      height 10px
-                      margin-right 3px
-                      background-size 10px 10px
-                      &:last-child
-                        margin-right 0
-                      &.on
-                        bg-image('./images/stars/star24_on')
-                      &.half
-                        bg-image('./images/stars/star24_half')
-                      &.off
-                        bg-image('./images/stars/star24_off')
+
                 .rating_section
                   float left
                   font-size 10px
