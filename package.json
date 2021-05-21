@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "better-scroll": "^2.3.1",
+    "date-fns": "^2.21.3",
     "mint-ui": "^2.2.13",
+    "mockjs": "^1.1.0",
+    "moment": "^2.29.1",
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.2",
     "vue-router": "^3.5.1",
