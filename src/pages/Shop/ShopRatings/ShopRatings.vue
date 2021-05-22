@@ -308,6 +308,7 @@ export default {
           .delivery
             display: inline-block
             vertical-align: top
+            height 12px
             line-height: 12px
             font-size: 10px
             color: rgb(147, 153, 159)

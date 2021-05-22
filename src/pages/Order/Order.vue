@@ -3,17 +3,26 @@
     <HeaderTop title="订单列表" />
     <section class="order_no_login">
       <img src="./images/person.png" />
-      <h3>登录后查看外卖订单</h3>
-      <button>立即登陆</button>
+      <h3>{{ userInfo._id ? "暂无订单记录" : "登录后查看外卖订单" }}</h3>
+      <button @click="toLogin" v-show="!userInfo._id">立即登陆</button>
     </section>
   </section>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import HeaderTop from "../../components/HeaderTop/HeaderTop.vue";
 export default {
+  methods: {
+    toLogin() {
+      this.$router.push("/login");
+    }
+  },
   components: {
     HeaderTop
+  },
+  computed: {
+    ...mapState(["userInfo"])
   }
 };
 </script>
@@ -72,7 +81,7 @@ export default {
       padding 10px 0
       font-size 17px
       color #6a6a6a
-    >button
+    button
       display inline-block
       background #02a774
       font-size 14px
